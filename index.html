@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sana ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:linear-gradient(45deg,#ffdde1,#ee9ca7);
+    font-family:Arial;
+    overflow:hidden;
+    text-align:center;
+}
+
+h1{
+    color:white;
+    font-size:2.2rem;
+}
+
+/* Kalp patlama */
+.heart-pop{
+    position:absolute;
+    font-size:20px;
+    animation:fly 1s ease-out forwards;
+}
+
+@keyframes fly{
+    to{
+        transform:translateY(-120px);
+        opacity:0;
+    }
+}
+
+/* Gizli mesaj */
+button{
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:white;
+    cursor:pointer;
+    font-size:1rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 id="text"></h1>
+
+<button onclick="alert('Seni seviyorum ❤️')">
+Gizli Mesaj 💌
+</button>
+
+<script>
+// TYPEWRITER
+const msg = "Seni kötü hissettirdiğim için özür dilerim";
+let i = 0;
+
+function type(){
+    if(i < msg.length){
+        document.getElementById("text").innerHTML += msg[i];
+        i++;
+        setTimeout(type, 100);
+    }
+}
+type();
+
+
+// KALP PATLAMA
+document.addEventListener("click", (e) => {
+    for(let i=0;i<6;i++){
+        const h = document.createElement("div");
+        h.className = "heart-pop";
+        h.innerHTML = "❤️";
+        h.style.left = e.clientX + "px";
+        h.style.top = e.clientY + "px";
+        document.body.appendChild(h);
+
+        setTimeout(()=>h.remove(),1000);
+    }
+});
+</script>
+
+</body>
+</html>
