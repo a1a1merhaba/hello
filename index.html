@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Özür Dilerim ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#111827;
+    font-family:Arial, sans-serif;
+}
+
+/* Ana mesaj */
+.message{
+    position:absolute;
+    z-index:2;
+    text-align:center;
+    color:white;
+    font-size:2rem;
+    padding:20px;
+    line-height:1.5;
+}
+
+/* Kalp yağmuru */
+.rain-heart{
+    position:absolute;
+    top:-50px;
+    color:#ff4d6d;
+    animation:fall linear forwards;
+    user-select:none;
+}
+
+/* Tıklama kalpleri */
+.pop-heart{
+    position:absolute;
+    animation:pop 1s ease-out forwards;
+    pointer-events:none;
+}
+
+/* Buton */
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:12px;
+    background:white;
+    color:#111827;
+    font-size:1rem;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
+
+@keyframes pop{
+    to{
+        transform:
+            translateY(-120px)
+            translateX(calc(-50px + 100px * var(--x)));
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="message">
+    Seni Kötü hissettirdiğim için özür dilerim 😔
+    <br>
+    <button onclick="showMessage()">
+        Gizli Mesaj 💌
+    </button>
+</div>
+
+<script>
+
+// GİZLİ MESAJ
+function showMessage(){
+    alert("Seni seviyorum ❤️");
+}
+
+// KALP YAĞMURU
+function createRainHeart(){
+    const heart = document.createElement("div");
+
+    heart.classList.add("rain-heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+
+    const duration = 4 + Math.random() * 4;
+    heart.style.animationDuration = duration + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    }, duration * 1000);
+}
+
+setInterval(createRainHeart, 250);
+
+
+// TIKLAYINCA KALP PATLAMASI
+document.addEventListener("click", (e)=>{
+
+    for(let i=0;i<8;i++){
+
+        const heart = document.createElement("div");
+
+        heart.classList.add("pop-heart");
+        heart.innerHTML = "❤️";
+
+        heart.style.left = e.clientX + "px";
+        heart.style.top = e.clientY + "px";
+
+        heart.style.setProperty("--x", Math.random());
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },1000);
+    }
+});
+
+</script>
+
+</body>
+</html>
